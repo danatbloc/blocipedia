@@ -27,6 +27,7 @@ source 'https://rubygems.org'
  gem 'bootstrap-sass'
  gem 'bcrypt'
  gem 'figaro'
+ gem 'devise'
 
  group :development do
    # Use sqlite3 as the development database for Active Record
@@ -45,5 +46,6 @@ source 'https://rubygems.org'
    gem 'rspec-rails', '~> 3.0'
    gem 'rails-controller-testing'
    gem 'shoulda'
+   gem 'factory_bot_rails', '~> 4.0'
    gem 'byebug', platform: :mri
  end
