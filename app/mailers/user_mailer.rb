@@ -6,15 +6,15 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.signup.subject
   #
-  def signup(user)
-    
+  def stub(user)
+
     headers["Message-ID"] = "<user/#{user.id}@pure-eyrie-71103.herokuapp.com>"
     headers["In-Reply-To"] = "<user/#{user.id}@pure-eyrie-71103.herokuapp.com>"
     headers["References"] = "<user/#{user.id}@pure-eyrie-71103.herokuapp.com>"
 
     @user = user
 
-    mail(to: user.email, subject: "Blocipedia Sign Up")
+    mail(to: user.email, subject: "Subject")
 
   end
 
