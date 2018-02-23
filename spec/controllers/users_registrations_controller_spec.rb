@@ -71,7 +71,6 @@ RSpec.describe Devise::RegistrationsController, type: :controller do
         put :update, params: { user: {user_id: my_user.id, name: new_name, email: my_user.email, password: my_user.password } }
 
         updated_user = assigns(:user)
-
         expect(updated_user.id).to eq my_user.id
         expect(updated_user.name).to eq new_name
       end

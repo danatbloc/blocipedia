@@ -28,6 +28,7 @@ source 'https://rubygems.org'
  gem 'bcrypt'
  gem 'figaro'
  gem 'devise'
+ gem 'nav_links'
 
  group :development do
    # Use sqlite3 as the development database for Active Record

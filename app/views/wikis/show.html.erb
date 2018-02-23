@@ -1,0 +1,10 @@
+<div>
+  <h1><%= @wiki.title %></h1>
+
+  <p><%= @wiki.body %></p>
+
+  <span><%= link_to "Edit", edit_wiki_path(@wiki) %></span>
+  <span><%= link_to "Delete", @wiki , method: :delete, data: { confirm: 'Are you sure?' } %></span>
+  <p><%= link_to "All Wikis", wikis_path %></p>
+
+</div>

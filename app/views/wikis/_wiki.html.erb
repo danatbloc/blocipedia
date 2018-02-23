@@ -1,0 +1,15 @@
+<div class="wiki_list_item">
+  <h2><b><%= link_to wiki.title, wiki_path(wiki), style:"font-weight: bolder" %></b></h2>
+  <p><%= wiki.body %></p>
+  <small>
+    <span>submitted <%= time_ago_in_words(wiki.created_at) %> ago</span>
+    <% unless wiki.updated_at == wiki.created_at %>
+      <span> - updated <%= time_ago_in_words(wiki.updated_at) %> ago</span>
+    <% end %>
+  </small>
+  <br>
+  <span><%= link_to "Edit", edit_wiki_path(wiki) %></span>
+
+  <span><%= link_to "Delete", wiki , method: :delete, data: { confirm: 'Are you sure?' } %></span>
+
+</div>

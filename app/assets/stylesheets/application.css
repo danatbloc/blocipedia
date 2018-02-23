@@ -13,3 +13,76 @@
  *= require_tree .
  *= require_self
  */
+
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html,label,figure,figcaption,p,h1,h2,h3,h4,h5,span,li,ol,ul,table,tr,td,thead,nav,body,input{
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif, arial;
+  color: #4343434;
+}
+
+li {
+   list-style-type: none;
+ }
+
+ a {
+   text-decoration: none;
+   color: #444;
+   font-weight: normal;
+ }
+
+ a:hover {
+   color: #EA3C34;
+ }
+
+ table, tr, th, td {
+   border-collapse: collapse;
+   border: 1px solid gray;
+   padding: 3px 5px;
+   text-align: center;
+ }
+
+ td {
+   text-align: left;
+ }
+
+ tfoot {
+   background: rgba(240,152,63,0.8);
+ }
+
+ thead {
+   background: lightblue;
+ }
+
+ #main_content {
+   padding: 8px;
+ }
+
+ header {
+   background: rgb(233,233,233);
+   padding: 8px;
+   margin-bottom: 10px;
+ }
+
+ header li {
+   display: inline-block;
+   margin-right: 2%;
+ }
+
+ header li a {
+   color: #4F2077;
+ }
+
+ header li a:hover,
+ header li a.selected {
+   color: #EA3C34;
+ }
+
+ .wiki_list_item {
+   margin-bottom: 16px;
+ }
