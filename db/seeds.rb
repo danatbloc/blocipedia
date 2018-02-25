@@ -31,16 +31,16 @@ admin = User.create!(
 )
 
 standard = User.create!(
-  name:     'Member User',
-  email:    'member@example.com',
+  name:     'Standard User',
+  email:    'standard@example.com',
   role:     'standard',
   password: '111111',
   confirmed_at: Time.now
 )
 
 premium = User.create!(
-  name:     'Moderator User',
-  email:    'moderator@example.com',
+  name:     'Premium User',
+  email:    'premium@example.com',
   role:     'premium',
   password: '111111',
   confirmed_at: Time.now
