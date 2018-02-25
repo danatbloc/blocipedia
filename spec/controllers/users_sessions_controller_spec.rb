@@ -31,6 +31,16 @@ RSpec.describe Users::SessionsController, type: :controller do
         expect(session[:user_id]).to eq(my_user.id)
       end
 
+      it "assigns standard role" do
+        post :create, params: { user: { email: my_user.email, password: my_user.password } }
+        expect(my_user.role).to eq("standard")
+      end
+
+      it "formats user name" do
+        post :create, params: { user: { email: my_user.email, password: my_user.password } }
+        expect(my_user.name).to eq(my_user.name.downcase.capitalize)
+      end
+
       it "does not add a user id to session due to missing password" do
         post :create, params: { user: { email: my_user.email } }
         expect(@controller.user_signed_in?).to eq(false)

@@ -3,20 +3,22 @@ require 'rails_helper'
 RSpec.describe WikisController, type: :controller do
 
 let (:my_user) { create(:user) }
+let(:my_wiki) { create(:wiki, user: my_user) }
+let(:private_wiki) { create(:wiki, private: true) }
 
   context "signed out user" do
 
     describe "GET #index" do
-      it "returns http redirect" do
+      it "returns http success" do
         get :index
-        expect(response).to redirect_to(new_user_session_path)
+        expect(response).to have_http_status(:success)
       end
     end
 
     describe "GET #show" do
-      it "returns http redirect" do
-        get :show, params: { id: my_user.id }
-        expect(response).to redirect_to(new_user_session_path)
+      it "returns http success" do
+        get :show, params: { id: my_wiki.id }
+        expect(response).to have_http_status(:success)
       end
     end
 
@@ -29,7 +31,14 @@ let (:my_user) { create(:user) }
 
     describe "GET #edit" do
       it "returns http redirect" do
-        get :edit, params: { id: my_user.id }
+        get :edit, params: { id: my_wiki.id }
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
+    describe "DELETE #destroy" do
+      it "returns http redirect" do
+        delete :destroy, params: { id: my_wiki.id }
         expect(response).to redirect_to(new_user_session_path)
       end
     end
@@ -37,8 +46,6 @@ let (:my_user) { create(:user) }
   end
 
   context "signed in user" do
-
-    let(:my_wiki) { create(:wiki, user: my_user) }
 
     before do
       sign_in(my_user)
@@ -125,6 +132,17 @@ let (:my_user) { create(:user) }
         expect(wiki_instance.title).to eq my_wiki.title
         expect(wiki_instance.body).to eq my_wiki.body
       end
+
+      it "returns http redirect for someone elses private wiki" do
+        get :edit, params: { id: private_wiki.id }
+        expect(response).to redirect_to wiki_path
+      end
+
+      it "flashes #notice not allow to edit private wiki" do
+        get :edit, params: { id: private_wiki.id }
+        expect(flash.now[:notice]).to be_present
+      end
+
     end
 
     describe "PUT update" do
@@ -160,6 +178,13 @@ let (:my_user) { create(:user) }
         delete :destroy, params: { id: my_wiki.id }
         expect(response).to redirect_to wikis_path
       end
+
+      it "does not delete someone elses wiki" do
+        delete :destroy, params: { id: private_wiki.id }
+        count = Wiki.where({id: private_wiki.id}).size
+        expect(count).to eq 1
+      end
+
     end
 
   end

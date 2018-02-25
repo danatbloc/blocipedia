@@ -1,3 +1,31 @@
 // Place all the styles related to the Wikis controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.wiki_list_item {
+  margin-bottom: 16px;
+}
+
+.edit_button,
+.delete_button,
+.all_wikis_button {
+  padding: 1px 4px;
+  background: linear-gradient(rgba(144,144,144,0.6),rgba(166,166,166,1));
+  border: 1px solid gray;
+  border-radius: 3px;
+}
+
+.edit_button a,
+.delete_button a,
+.all_wikis_button a {
+  color: white;
+  font-size: .8rem;
+}
+
+.edit_button a:hover,
+.delete_button a:hover,
+.all_wikis_button a:hover {
+  color: rgb(33,33,33);
+  font-size: .8rem;
+}

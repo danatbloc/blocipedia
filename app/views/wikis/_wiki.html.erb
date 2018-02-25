@@ -6,10 +6,18 @@
     <% unless wiki.updated_at == wiki.created_at %>
       <span> - updated <%= time_ago_in_words(wiki.updated_at) %> ago</span>
     <% end %>
+    <br>
+    <b><%= wiki.private ? "Private" : "Public" %></b>
+    <br>
+    <span>Author: <%= wiki.user == current_user ? "Me" : wiki.user.name %></span>
   </small>
   <br>
-  <span><%= link_to "Edit", edit_wiki_path(wiki) %></span>
 
-  <span><%= link_to "Delete", wiki , method: :delete, data: { confirm: 'Are you sure?' } %></span>
+  <% if user_can_edit?(wiki) %>
+    <span class="edit_button"><%= link_to "Edit", edit_wiki_path(wiki) %></span>
+  <% end %>
+  <% if user_can_delete?(wiki) %>
+    <span class="delete_button"><%= link_to "Delete", wiki , method: :delete, data: { confirm: 'Are you sure?' } %></span>
+  <% end %>
 
 </div>
