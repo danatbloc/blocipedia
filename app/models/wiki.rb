@@ -7,7 +7,7 @@ class Wiki < ApplicationRecord
   }
 
   validates :body, {
-    length: { minimum: 15, maximum: 100 },
+    length: { minimum: 15, maximum: 10000 },
     presence: true,
   }
 

@@ -49,4 +49,5 @@ source 'https://rubygems.org'
    gem 'shoulda'
    gem 'factory_bot_rails', '~> 4.0'
    gem 'byebug', platform: :mri
+   gem 'faker'
  end
