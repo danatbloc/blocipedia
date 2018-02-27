@@ -1,6 +1,6 @@
 <div class="wiki_list_item">
   <h2><b><%= link_to wiki.title, wiki_path(wiki), style:"font-weight: bolder" %></b></h2>
-  <p><%= wiki.body %></p>
+  <p><%= markdown(wiki.body) %></p>
   <small>
     <span>submitted <%= time_ago_in_words(wiki.created_at) %> ago</span>
     <% unless wiki.updated_at == wiki.created_at %>
