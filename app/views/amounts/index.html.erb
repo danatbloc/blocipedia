@@ -1,0 +1,11 @@
+<h1>ADMIN STUFF</h1>
+<br>
+<h2>Membership-Upgrade Price</h2>
+<h3>Current Price: $<%= '%.2f' % (@amounts.first.price/100.to_f) %></h3>
+<br>
+<span class="button"><%= link_to "Edit Price", edit_amount_path(@amounts.first) %></span>
+<span class="button"><%= link_to "New Price", new_amount_path(@amounts.first) %></span>
+<br>
+<hr>
+<br>
+<h2><%= link_to "Upgrade / Downgrade Memberships", admins_upgrade_path %></h2>

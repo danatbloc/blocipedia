@@ -13,6 +13,14 @@
     <%= f.email_field :email, autocomplete: "email" %>
   </div>
 
+  <% if current_user.premium? %>
+    <div class="field downgrade">
+      <%= check_box_tag :downgrade, params[:downgrade] %>
+      <%= label_tag :downgrade, "Downgrade your Membership" %><br />
+      <small>Check the box to go back to being a lowly Standard Member. This is not reversible and all your private wikis will become public. Why would anyone do this? We don't know, but some people are just crazy like that.</small>
+    </div>
+  <% end %>
+
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
@@ -40,7 +48,7 @@
     <%= f.submit "Update" %>
   </div>
 <% end %>
-
+<br><br>
 <h3>Cancel my account</h3>
 
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>

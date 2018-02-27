@@ -14,10 +14,10 @@
   <br>
 
   <% if user_can_edit?(wiki) %>
-    <span class="edit_button"><%= link_to "Edit", edit_wiki_path(wiki) %></span>
+    <span class="button"><%= link_to "Edit", edit_wiki_path(wiki) %></span>
   <% end %>
   <% if user_can_delete?(wiki) %>
-    <span class="delete_button"><%= link_to "Delete", wiki , method: :delete, data: { confirm: 'Are you sure?' } %></span>
+    <span class="button"><%= link_to "Delete", wiki , method: :delete, data: { confirm: 'Are you sure?' } %></span>
   <% end %>
 
 </div>

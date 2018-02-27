@@ -1,0 +1,28 @@
+// Place all the styles related to the admins controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.upgrade_button,
+.downgrade_button {
+  border: 1px solid gray;
+  border-radius: 2px;
+  color: white;
+  font-size: .8rem;
+  width: 90px;
+  padding: 2px 0;
+}
+
+.upgrade_button {
+  background: linear-gradient(rgba(144,144,255,0.6),rgba(133,133,222,1));
+}
+
+.downgrade_button {
+  background: linear-gradient(rgba(255,144,144,0.6),rgba(222,133,133,1));
+}
+
+.upgrade_button:hover,
+.downgrade_button:hover {
+  color: rgb(233,233,233);
+  font-size: .8rem;
+}

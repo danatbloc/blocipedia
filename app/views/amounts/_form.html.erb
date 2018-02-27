@@ -1,0 +1,25 @@
+<%= form_for amount do |f| %>
+
+  <% if amount.errors.any? %>
+    <div>
+      <h4><%= pluralize(amount.errors.count, "error") %>.</h4>
+      <ul>
+        <% amount.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>Enter amount in pennies (e.g. 100 = 1 dollar)</p>
+
+  <div class="form-group">
+    <%= f.label :price %>
+    <%= f.number_field :price %>
+  </div><br>
+
+  <div class="form-group">
+    <%= f.submit "Save" %>
+  </div><br>
+
+<% end %>

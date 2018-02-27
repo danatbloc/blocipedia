@@ -20,9 +20,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    super
+
+    if downgraded?
+      pwikis = current_user.wikis.privates
+
+      pwikis.each do |wiki|
+        wiki.update_attribute("private", false)
+      end
+
+      current_user.standard!
+      flash[:notice] = "Congratulations. You're ordinary."
+    end
+
+  end
 
   # DELETE /resource
   # def destroy
@@ -59,4 +71,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  private
+
+  def downgraded?
+    params[:downgrade].present? && params[:downgrade] == "on"
+  end
 end

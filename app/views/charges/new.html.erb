@@ -1,0 +1,22 @@
+<%= form_tag charges_path do %>
+  <article>
+    <% if flash[:error].present? %>
+      <div id="error_explanation">
+        <p><%= flash[:error] %></p>
+      </div>
+    <% end %>
+    <p>Upgrade to Premium Membership! </p>
+    <p>Create Private Wikis!</p>
+    <p>Membership has its privileges.</p><br>
+    <label class="amount">
+      <span>Only: $<%= '%.2f' % (@price/100.to_f) %></span>
+    </label>
+  </article>
+
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-description="Premium Upgrade"
+          data-name="Blocipedia"
+          data-amount="<%= @price %>"
+          data-locale="auto"></script>
+<% end %>

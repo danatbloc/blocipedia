@@ -9,4 +9,11 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
     devise_parameter_sanitizer.permit(:account_update, keys: [:name])
   end
+
+  def check_if_user_is_admin
+    return true if current_user && current_user.admin?
+
+    flash[:notice] = "Don't even.."
+    redirect_to '/'
+  end
 end

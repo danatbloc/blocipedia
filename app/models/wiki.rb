@@ -1,6 +1,8 @@
 class Wiki < ApplicationRecord
   belongs_to :user
 
+  scope :privates, -> { where( 'private = ?', true ) }
+
   validates :title, {
     length: { minimum: 5, maximum: 100 },
     presence: true,

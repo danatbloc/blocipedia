@@ -29,6 +29,7 @@ source 'https://rubygems.org'
  gem 'figaro'
  gem 'devise'
  gem 'nav_links'
+ gem 'stripe'
 
  group :development do
    # Use sqlite3 as the development database for Active Record

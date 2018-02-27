@@ -7,25 +7,20 @@
   margin-bottom: 16px;
 }
 
-.edit_button,
-.delete_button,
-.all_wikis_button {
+.button {
   padding: 1px 4px;
   background: linear-gradient(rgba(144,144,144,0.6),rgba(166,166,166,1));
   border: 1px solid gray;
   border-radius: 3px;
+  width: auto;
 }
 
-.edit_button a,
-.delete_button a,
-.all_wikis_button a {
+.button a {
   color: white;
   font-size: .8rem;
 }
 
-.edit_button a:hover,
-.delete_button a:hover,
-.all_wikis_button a:hover {
+.button a:hover {
   color: rgb(33,33,33);
   font-size: .8rem;
 }

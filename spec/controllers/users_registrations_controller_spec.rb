@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Devise::RegistrationsController, type: :controller do
+RSpec.describe Users::RegistrationsController, type: :controller do
 
   let(:my_user) { create(:user) }
 
