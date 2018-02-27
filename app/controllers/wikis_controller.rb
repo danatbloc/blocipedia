@@ -5,7 +5,11 @@ class WikisController < ApplicationController
   before_action :check_if_user_is_allowed_to_destroy?, only: [:destroy]
 
   def index
-    @wikis = Wiki.all
+    if current_user && (current_user.admin? || current_user.premium?)
+      @wikis = Wiki.all
+    else
+      @wikis = Wiki.publics
+    end
   end
 
   def show
