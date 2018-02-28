@@ -10,15 +10,15 @@
       </ul>
     </div>
   <% end %>
-
+  <br>
   <div class="form-group">
-    <%= f.label :title %>
-    <%= f.text_field :title, class: 'form-control', placeholder: "Enter wiki title" %>
+    <%= f.label :title %><br>
+    <%= f.text_field :title, class: 'form-control', placeholder: "Enter wiki title", class:"text_field" %>
   </div><br>
 
-  <div class="form-group">
+  <div class="form-group edit_wiki_body">
     <%= f.label :body %><br>
-    <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki body" %>
+    <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki body", class:"text_area" %>
   </div>
 
   <% if user_can_privatize_the_wiki?(wiki) %>
@@ -27,10 +27,10 @@
       <%= f.label :private %>
     </div>
   <% end %>
-  
+
   <br>
   <div class="form-group">
-    <%= f.submit "Save", class: 'btn btn-success' %>
+    <%= f.submit "Save", class:"submit_button" %>
   </div>
 
 <% end %>

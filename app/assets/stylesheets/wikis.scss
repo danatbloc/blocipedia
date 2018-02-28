@@ -4,23 +4,60 @@
 
 
 .wiki_list_item {
-  margin-bottom: 16px;
+  text-align: left;
+  padding: 18px 0;
+  border-bottom: 2px solid black;
 }
 
 .button {
-  padding: 1px 4px;
-  background: linear-gradient(rgba(144,144,144,0.6),rgba(166,166,166,1));
-  border: 1px solid gray;
-  border-radius: 3px;
-  width: auto;
+  background: linear-gradient(rgba(166,166,255,1),rgba(44,44,244,0.6));
+  border-radius: 2px;
+  border: 1px solid rgb(33,33,33);
+  display: inline-block;
 }
 
 .button a {
+  padding: 3px 6px;
   color: white;
-  font-size: .8rem;
+  display: block;
+}
+
+.button:hover {
+  border: 1px solid rgb(133,133,133);
 }
 
 .button a:hover {
-  color: rgb(33,33,33);
-  font-size: .8rem;
+  color: rgb(222,222,222);
+}
+
+.submit_button {
+  background: linear-gradient(rgba(166,166,255,1),rgba(44,44,244,0.6));
+  border-radius: 2px;
+  border: 1px solid rgb(33,33,33);
+  display: inline-block;
+  padding: 4px 16px;
+  color: white;
+  font-size: 1rem;
+}
+
+.submit_button:hover {
+  border: 1px solid rgb(133,133,133);
+  cursor: pointer;
+  color: rgb(222,222,222);
+}
+
+.text_field {
+  height: 23px;
+  width: 80%;
+  font-size: 1.1rem;
+}
+
+.text_area {
+  height: 180px;
+  width: 80%;
+  font-size: 1rem;
+}
+
+#wiki_show_page {
+  text-align: left;
 }

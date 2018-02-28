@@ -1,2 +1,16 @@
-<h1>Blocipedia!</h1>
-<p>Howdy.</p>
+<main id="home_page">
+  <h1>Blocipedia: Social, Markdown Wikis!</h1>
+
+  <div id="sign_up_box">
+    <h3>Create and share Markdown Wikis</h3>
+
+    <% unless current_user %>
+      <span class="button"><%= link_to "Sign up", new_user_registration_path %></span>
+    <% end %>
+
+    <% if current_user %>
+      <span class="button"><%= link_to "Check Out The Wikis", wikis_path %></span>
+    <% end %>
+
+  </div>
+</main>

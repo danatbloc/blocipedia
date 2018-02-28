@@ -2,6 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+#main_content {
+  text-align: center;
+}
+
+#sign_up_box {
+  padding: 18px 10px;
+  border: 2px solid black;
+  width: 400px;
+  display: inline-block;
+  margin: 25px auto;
+}
+
+#sign_up_box h3 {
+  margin-bottom: 20px;
+}
+
 .field {
   margin-bottom: 20px;
 }
