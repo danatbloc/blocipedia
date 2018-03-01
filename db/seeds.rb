@@ -8,9 +8,9 @@
 
 require 'faker'
 
-role = ["standard", "admin", "premium"]
+role = ["standard", "premium"]
 
-5.times do
+20.times do
 
   User.create(
     name: Faker::RuPaul.unique.queen,
@@ -55,7 +55,7 @@ users = User.all
 
   wiki = Wiki.create!(
   title:  Faker::Company.bs,
-  body:   Faker::TheFreshPrinceOfBelAir.quote,
+  body:   (Faker::TheFreshPrinceOfBelAir.quote + "........."),
   user: user,
   private: private
 )
@@ -63,9 +63,28 @@ users = User.all
 
 end
 
+wikis = Wiki.all
 
+15.times do
+
+  pick = false
+
+  until pick == true
+    wiki = wikis.sample
+    user = users.sample
+
+
+    (wiki.private && (wiki.user != user) && (user.role != 'admin') && (Collaborator.pluck(:user_id).include?(user.id) == false) ) ? pick = true : false
+  end
+
+  Collaborator.create( user: user, wiki: wiki )
+
+end
+
+Amount.create( price: 1500 )
 
 
 puts "Seed finished"
 puts "#{User.count} users created"
 puts "#{Wiki.count} wikis created"
+puts "#{Collaborator.count} collaborators created"

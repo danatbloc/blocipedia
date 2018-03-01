@@ -5,11 +5,7 @@ class WikisController < ApplicationController
   before_action :check_if_user_is_allowed_to_destroy?, only: [:destroy]
 
   def index
-    if current_user && (current_user.admin? || current_user.premium?)
-      @wikis = Wiki.all
-    else
-      @wikis = Wiki.publics
-    end
+    @wikis = Wiki.all
   end
 
   def show
@@ -17,14 +13,17 @@ class WikisController < ApplicationController
 
   def new
     @wiki = Wiki.new
+    @users = collaborator_list
   end
 
   def create
+    @users = collaborator_list
     @wiki = Wiki.new(wiki_params)
     @wiki.user = current_user
 
     if @wiki.save
       flash[:notice] = "Wiki was saved."
+      update_collaborators if params[:access].present?
       redirect_to @wiki
     else
       flash[:warning] = "There was a problem saving the wiki."
@@ -33,12 +32,14 @@ class WikisController < ApplicationController
   end
 
   def edit
+    @users = collaborator_list
   end
 
   def update
-
+    @users = collaborator_list
     if @wiki.update(wiki_params)
       flash[:notice] = "Wiki was saved."
+      update_collaborators if params[:access].present?
       redirect_to @wiki
     else
       flash[:warning] = "There was a problem saving the wiki."
@@ -66,7 +67,7 @@ class WikisController < ApplicationController
   end
 
   def check_if_user_is_allowed_to_update?
-    unless current_user && (( current_user.admin?) || (current_user.premium? && (@wiki.user == current_user)) || !(@wiki.private))
+    unless current_user && (( current_user.admin?) || (current_user.premium? && (@wiki.user == current_user)) || !(@wiki.private) || (@wiki.users.pluck(:id).include?(current_user.id)) )
       flash[:notice] = "You cannot edit this private wiki."
       redirect_to @wiki
     end
@@ -81,6 +82,28 @@ class WikisController < ApplicationController
 
   def set_wiki
     @wiki = Wiki.find(params[:id])
+  end
+
+  def collaborator_list
+    users = User.all
+    admins = User.select{ |u| u.admin? }
+    users - admins - [current_user]
+  end
+
+  def update_collaborators
+    old_collaborators = @wiki.users.pluck(:id)
+    new_collaborators = params[:access].map(&:to_i)
+    delete_collaborators = old_collaborators - new_collaborators
+    add_collaborators = new_collaborators - old_collaborators
+
+    delete_collaborators.each do |id|
+      c = Collaborator.find{|c| c.user_id == id && c.wiki_id == @wiki.id}
+      c.destroy
+    end
+
+    add_collaborators.each do |id|
+      Collaborator.create( user_id: id, wiki_id: @wiki.id )
+    end
   end
 
 end

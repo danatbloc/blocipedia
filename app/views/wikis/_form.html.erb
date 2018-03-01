@@ -26,7 +26,29 @@
       <%= f.check_box :private %>
       <%= f.label :private %>
     </div>
+    <br><br>
+    <p>Add collaborators to this wiki:</p>
+      <table>
+        <thead>
+          <td>Name</td>
+          <td>Email</td>
+          <td>Role</td>
+          <td>Give Access</td>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= user.name %></td>
+              <td><%= user.email %></td>
+              <td><%= user.role %></td>
+              <td><%= check_box_tag 'access[]', user.id, wiki.collaborators.pluck(:user_id).include?(user.id) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
   <% end %>
+
 
   <br>
   <div class="form-group">

@@ -1,23 +1,30 @@
-<div class="wiki_list_item">
-  <h2><b><%= link_to wiki.title, wiki_path(wiki), style:"font-weight: bolder" %></b></h2>
-  <p><%= markdown(wiki.body) %></p>
-  <small>
-    <span>submitted <%= time_ago_in_words(wiki.created_at) %> ago</span>
-    <% unless wiki.updated_at == wiki.created_at %>
-      <span> - updated <%= time_ago_in_words(wiki.updated_at) %> ago</span>
+<% if user_can_see_the_wiki?(wiki) %>
+
+  <div class="wiki_list_item">
+    <h2><b><%= link_to wiki.title, wiki_path(wiki), style:"font-weight: bolder" %></b></h2>
+    <p><%= markdown(wiki.body) %></p>
+    <small>
+      <span>submitted <%= time_ago_in_words(wiki.created_at) %> ago</span>
+      <% unless wiki.updated_at == wiki.created_at %>
+        <span> - updated <%= time_ago_in_words(wiki.updated_at) %> ago</span>
+      <% end %>
+      <br>
+      <b><%= wiki.private ? "Private" : "Public" %></b>
+      <br>
+      <span>Author: <%= wiki.user == current_user ? "Me" : wiki.user.name %></span><br>
+      <% unless !(wiki.private) %>
+        <span><%= 'Collaborator'.pluralize(wiki.users.count) %>: <%= wiki.users.empty? ? "none" : wiki.users.pluck(:name).join(', ') %></span><br>
+      <% end %>
+    </small>
+    <br>
+
+    <% if user_can_edit?(wiki) %>
+      <span class="button"><%= link_to "Edit", edit_wiki_path(wiki) %></span>
     <% end %>
-    <br>
-    <b><%= wiki.private ? "Private" : "Public" %></b>
-    <br>
-    <span>Author: <%= wiki.user == current_user ? "Me" : wiki.user.name %></span>
-  </small>
-  <br>
+    <% if user_can_delete?(wiki) %>
+      <span class="button"><%= link_to "Delete", wiki , method: :delete, data: { confirm: 'Are you sure?' } %></span>
+    <% end %>
 
-  <% if user_can_edit?(wiki) %>
-    <span class="button"><%= link_to "Edit", edit_wiki_path(wiki) %></span>
-  <% end %>
-  <% if user_can_delete?(wiki) %>
-    <span class="button"><%= link_to "Delete", wiki , method: :delete, data: { confirm: 'Are you sure?' } %></span>
-  <% end %>
+  </div>
 
-</div>
+<% end %>

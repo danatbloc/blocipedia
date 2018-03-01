@@ -5,7 +5,8 @@
     <h3>Create and share Markdown Wikis</h3>
 
     <% unless current_user %>
-      <span class="button"><%= link_to "Sign up", new_user_registration_path %></span>
+      <span class="button"><%= link_to "Sign up", new_user_registration_path %></span><br><br>
+      <span class="button"><%= link_to "Sign in", new_user_session_path %></span>
     <% end %>
 
     <% if current_user %>

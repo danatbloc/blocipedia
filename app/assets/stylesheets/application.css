@@ -44,6 +44,13 @@ li {
    border-collapse: collapse;
    border: 1px solid gray;
    padding: 3px 5px;
+ }
+
+ table {
+   margin: 20px auto;
+ }
+
+ table thead td {
    text-align: center;
  }
 
@@ -60,13 +67,18 @@ li {
  }
 
  #main_content {
-   padding: 15px;
+   padding: 56px 15px 15px;
+
  }
 
  header {
    background: rgb(233,233,233);
    padding: 8px;
    margin-bottom: 10px;
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
  }
 
  header li {
