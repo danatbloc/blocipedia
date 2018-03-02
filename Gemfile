@@ -31,6 +31,7 @@ source 'https://rubygems.org'
  gem 'nav_links'
  gem 'stripe'
  gem 'redcarpet'
+ gem 'friendly_id', '~> 5.1.0'
 
  group :development do
    # Use sqlite3 as the development database for Active Record
