@@ -5,7 +5,7 @@ class WikisController < ApplicationController
   before_action :check_if_user_is_allowed_to_destroy?, only: [:destroy]
 
   def index
-    @wikis = Wiki.all
+    @wikis = Wiki.visible_to(current_user)
   end
 
   def show
