@@ -15,9 +15,4 @@ module WikisHelper
       current_user.admin? || current_user.premium?
     end
   end
-
-  def user_can_see_the_wiki?(wiki)
-    !(wiki.private) || (current_user && (( current_user.admin?) || (current_user.premium? && (wiki.user == current_user)) || (wiki.users.pluck(:id).include?(current_user.id)) ))
-  end
-
 end

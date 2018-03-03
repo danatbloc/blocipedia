@@ -13,12 +13,12 @@
   <br>
   <div class="form-group">
     <%= f.label :title %><br>
-    <%= f.text_field :title, class: 'form-control', placeholder: "Enter wiki title", class:"text_field" %>
+    <%= f.text_field :title, placeholder: "Enter wiki title", class:"text_field" %>
   </div><br>
 
   <div class="form-group edit_wiki_body">
     <%= f.label :body %><br>
-    <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki body", class:"text_area" %>
+    <%= f.text_area :body, rows: 8, placeholder: "Enter wiki body", class:"text_area" %>
   </div>
 
   <% if user_can_privatize_the_wiki?(wiki) %>
