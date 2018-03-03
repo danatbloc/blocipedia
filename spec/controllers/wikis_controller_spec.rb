@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe WikisController, type: :controller do
 
-let (:my_user) { create(:user) }
-let(:my_wiki) { create(:wiki, user: my_user) }
-let(:private_wiki) { create(:wiki, private: true) }
+  let(:my_user) { create(:user) }
+  let(:my_wiki) { create(:wiki, user: my_user) }
+  let(:private_wiki) { create(:wiki, private: true) }
 
   context "signed out user" do
 
@@ -57,9 +57,13 @@ let(:private_wiki) { create(:wiki, private: true) }
         expect(response).to have_http_status(:success)
       end
 
-      it "assigns [my_wiki] to _wikis" do
+      it "assigns [my_wiki] to @wikis" do
+        publics = Wiki.where( 'private = ?', false )
+        collabs = Wiki.joins(:users).where('collaborators.user_id = ?', my_user.id)
+
         get :index
-        expect(assigns(:wikis)).to eq([my_wiki])
+
+        expect(assigns(:wikis)).to eq(publics + collabs)
       end
     end
 
@@ -135,7 +139,7 @@ let(:private_wiki) { create(:wiki, private: true) }
 
       it "returns http redirect for someone elses private wiki" do
         get :edit, params: { id: private_wiki.id }
-        expect(response).to redirect_to wiki_path
+        expect(response).to redirect_to private_wiki
       end
 
       it "flashes #notice not allow to edit private wiki" do

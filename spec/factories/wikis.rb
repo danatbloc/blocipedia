@@ -4,5 +4,6 @@ FactoryBot.define do
     sequence(:body) {|n| "This is body number #{n}"}
     private false
     user
+    sequence(:slug) {|n| "Title#{n}"}
   end
 end

@@ -1,18 +1,10 @@
 class Wiki < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :slugged
-  
+
   belongs_to :user
   has_many :collaborators, dependent: :destroy
   has_many :users, through: :collaborators
-
-
-  scope :privates, -> { where( 'private = ?', true ) }
-  scope :publics, -> { where( 'private = ?', false ) }
-  scope :owner, -> (cur_user) { where( "user_id = ?", cur_user.id ) }
-  scope :collabs, -> (cur_user) do
-    Wiki.joins(:users).where('collaborators.user_id = ?', cur_user.id)
-  end
 
   scope :visible_to, -> (user) do
     unless user
@@ -23,10 +15,18 @@ class Wiki < ApplicationRecord
       elsif user.standard?
         publics + collabs(user)
       else
-        publics + owner(user) + collabs(user)
+        publics + collabs(user) + owner(user)
       end
     end
   end
+
+  scope :privates, -> { where( 'private = ?', true ) }
+  scope :publics, -> { where( 'private = ?', false ) }
+  scope :owner, -> (cur_user) { where( "user_id = ?", cur_user.id ) }
+  scope :collabs, -> (cur_user) do
+    Wiki.joins(:users).where('collaborators.user_id = ?', cur_user.id)
+  end
+
 
 
   validates :title, {
